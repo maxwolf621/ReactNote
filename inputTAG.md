@@ -1,8 +1,6 @@
 ###### tags: `React`
-# Attributes in `<input\>
+# Attributes of tag input
 [TOC]
-
-
 
 If we have a function Component logingForm.js.
 ```javascript
