@@ -1,8 +1,10 @@
 ###### tags: `React`
-# Component
+# Function Component
+
+Component in React 分為 function component 以及  class component
 
 
-Fist take a look a example
+For example :: a function component
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -26,11 +28,13 @@ ReactDOM.render(
 );
 ```
 
-So to create a component we use 
+To use a component in the html we might ...
 ```jsx
-<Component/>
-// or 
-<Component></Component>
+<Component_name/>
+
+// OR
+
+<Component_name></Component_name>
 ```
 - 元素名稱第一個字母必須要是大寫、和函式(或class)名稱相同，JSX才會知道這是自製的component
 
