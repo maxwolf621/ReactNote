@@ -1,10 +1,9 @@
 ###### tags: `React`
 # Class Component
 
-[TOC]
+- Same Concept as Angualr's component
 
-## Declaration
-
+## Declaration of a class component
 ```jsx
 class Class_Name{
     constructor(){
@@ -43,7 +42,7 @@ export default App;
 - 在React component渲染DOM前/後其實是有一連串的流程 (a.k.a生命週期)，render()是在渲染前最後一個階段(有個例外，但那個例外很少用)
 - **`render()`只是渲染前最後一個階段，元件還沒有真的渲染到DOM上。所以不要在`render()`中操作有關`document.methods`**
 
-## Declaration of member data(field) by using `this`
+## Declaration of member data(field) by using `this` in component
 ```jsx
 class ClassName{
     constructor(){
@@ -52,7 +51,7 @@ class ClassName{
 }
 ```
 
-we can also define a member inside the method/function
+we can also define a member inside the method/function (like getter and setter method)
 ```jsx
 function func(val2){
     this.field_in_Func = val2;
@@ -66,6 +65,7 @@ function func(val2){
 ```jsx
 import React, { Component } from 'react';
 class App extends Component{
+
     // To use props
     constructor(props) {
         super(props);
@@ -102,10 +102,9 @@ this.memberFunctionName = this.memberFunctionName.bind(this)
 ### Example 
 
 Let's modify the above two files `index.js` and `App.js` 
-
-
-#### A index.js before modifying
+ 
 ```jsx
+// A index.js before modifying
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -129,10 +128,9 @@ ReactDOM.render(
 ```
 
 
-#### index.js
-
-put `changeName()` as member function in `App.js` from `index.js`
+With component concept we can now put `changeName()` as member function in `App.js` instead of placing it in `index.js`
 ```jsx
+// index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -147,16 +145,16 @@ ReactDOM.render(
 );
 ```
 
-#### App.js
-
 ```jsx
+// App.js
 import React, { Component } from 'react';
 class App extends Component{
-constructor(props) { 
-    super(props);
-    this.name="old_Name";
-    // To call itself
-    this.changeName=this.changeName.bind(this); 
+    constructor(props) { 
+        super(props);
+        this.name="old_Name";
+        
+        // To call itself
+        this.changeName=this.changeName.bind(this); 
 }
 
 changeName(newName){
@@ -173,7 +171,7 @@ render(){
 }
 ```
 - We have to use `this.` to call the member data(methods) from `Component`
-
+- `App.js` just like a component can be place to different js files (increase the Reusability)
 
 ## A function component without state member data 
 
