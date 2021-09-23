@@ -131,13 +131,10 @@ const LoginForm=()=>{
 export default LoginForm;
 ```
 ![](https://i.imgur.com/c0Ga6wx.gif)
+- 在render return前決定state初始值 -> 在render return時決定`defaultValue`值 -> 畫面彩現 -> 執行`componentDidMount`，在其中改變state值 -> `defaultValue`值不變, 因為在`componentDidMount`中設定state等同於我們在非input處修改state的狀況，所以如果你要讓input值等同從server取得的值，應該要用value來綁定。
 
-Flow
-在render return前決定state初始值 -> 在render return時決定`defaultValue`值 -> 畫面彩現 -> 執行`componentDidMount`，在其中改變state值 -> `defaultValue`值不變
-- 因為在`componentDidMount`中設定state等同於我們在非input處修改state的狀況，所以如果你要讓input值等同從server取得的值，應該要用value來綁定。
-
-如果綁了state在value上而沒有綁`onChange`?
-在這個狀況下，input會鎖死變成無法修改的狀態。你只能透過在從其他地方更改該state來修改input中的值。
+- 如果綁了state在value上而沒有綁`onChange`?
+  > 在這個狀況下，input會鎖死變成無法修改的狀態。你只能透過在從其他地方更改該state來修改input中的值。
 
 
 ## textarea
