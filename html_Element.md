@@ -23,7 +23,7 @@ const LoginForm=()=>{
 export default LoginForm;
 ```
 
-## default value
+## `defaultvalue`
 
 ```jsx
 import React,{useState} from "react";
@@ -44,7 +44,7 @@ export default LoginForm;
 ```
 ![](https://i.imgur.com/715vwzI.png)
 
-## value and state member data 
+## `value` and state member data 
 
 What is difference btw `value` and `defaultValue` ? 
 > value is dependent on static member data
@@ -56,7 +56,7 @@ return (
         <div>
             目前account:{account}
         </div>
-        // it will clear defaultValue
+        // button to set account value to ""
         <button onClick={()=>{setAccount("")}}>用按鍵取得新的account</button>
     </div>
 )
@@ -68,7 +68,6 @@ return (
 
 如果你希望「input中的值只在一開始受`state`影響」，就要用該`state`去綁定`defaultValue`；相反的，如果你希望「input中的值始終跟著`state`」，就要用該`state`去綁定`value`。
 
-
 input中的值始終跟著state，state的值也隨input值改變而更動 : 這樣的狀況我們會稱為控制組件/受控組件, 如下
 ```jsx
 import React,{useState} from "react";
@@ -77,10 +76,12 @@ const LoginForm=()=>{
 
     return (
         <div>
+            // value will keep listening what user type
             <input type="text" value={account} onChange={(e)=>{setAccount(e.target.value)}}/>
             <div>
                 目前account:{account}
             </div>
+            // set `value` to ""
             <button onClick={()=>{setAccount("")}}>用按鍵取得新的account</button>
         </div>
     )
@@ -89,22 +90,24 @@ export default LoginForm;
 ```
 
 ![](https://i.imgur.com/GuaagzK.gif)
-- after invoking `onClick`, the `<input>` bar will show as `value` attribute showed which is dependent on state member account 
+
 
 ## disabled
 
-just simply add `disabled` attribute in `<input/>` tag
-```javascript=
+語法
+```jsx
 <input type="text" disabled={true} defaultValue={account} onChange={(e)=>{setAccount(e.target.value)}}/>
-// or 
+
 <input type="text" disabled defaultValue={account} onChange={(e)=>{setAccount(e.target.value)}}/>
 ```
-with `disabled` we can't type/input any character/symbol/integer into the bar   
+
 ![](https://i.imgur.com/KR7vnAe.png)   
+- With `disabled` we can't type/input any character/symbol/integer into the input bar   
 
-- `disable`和`componentDidMount`搭配時容易發生的錯誤使用
 
-如果你想要在`componentDidMount`中去取得初始input值(一般發生在用`fetch`去取得該資料),那麼你不該使用`defaultValue`來設定。以下是用`componentDidMount`+`defaultValue`的狀況:
+
+`disable`和`componentDidMount`搭配時容易發生的錯誤使用    
+如果你想要在`componentDidMount`中去取得初始input值(一般發生在用`fetch`去取得該資料),那麼你不該使用`defaultValue`來設定。以下是用`componentDidMount`+`defaultValue`的狀況:   
 ```jsx
 import React,{useState,useEffect} from "react";
 const LoginForm=()=>{
