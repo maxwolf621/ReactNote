@@ -3,26 +3,24 @@
 [TOC]
 
 # progs
-:::info
-Using props to control the component's attributes (just like html tag's attributes `style`, `value` and `onclick` ... etc) as a object 
-:::
 
-For example there is react's component 
+We use `props` to control the value of component's attributes (like `@input`, `@output` in angular) ...
+
+For example there is react's component    
 ```jsx
 <App version="4" data="none"/>
 ```
-App的props包含了version、data，也就是對App來說，它接到一個像這樣結構的Object參數:
-```json
+
+App的`props`包含了`version` and `data`，也就是對App來說，它接到一個像這樣結構的Object參數:
+```console
 props:{
     version: "4",
     data: "none"
 }
 ```
-- We can it props binding for such way
 
-
-## Example 
-Using a props to display the button's name
+## Using a props to display the button's name
+ 
 ```jsx
 ReactDOM.render( 
     <div>
@@ -33,7 +31,7 @@ ReactDOM.render(
 );
 ```
 
-In component app.js 
+In `component app.js`
 ```jsx
 function App(props){
     return(
@@ -45,42 +43,38 @@ function App(props){
 ![](https://i.imgur.com/nM9CUEH.png)
 
 
-## DataType of props
+## props內部的資料型態
 
-以上是props的基礎使用方法。接下來講個前面提過但還是很容易踩到的坑: 
-- JSX語法中的資料型態問題。例如: 在下面的程式碼中，App接到的number和getData都是字串，並不是整數和布林值。
+
+using props to pass different data type of parameters 
 
 ```jsx
+// these value are string type
 <App number="87" getData="true"/>
-```
-必須要加上`{}`才會接到正確的js資料型態，使用變數時也要這樣。
-```jsx z
+
+// if we need to sepcify the data type then we use `{}`
 <App number={87} getData={true}/>
 ```
 
-We cant assign a props.variable a value
+We cant assign a `props.variable` a value
 ```
 this.props.variable= vlaue;
 ```
-- this will cause error 
 
-# Function Binding
+# Function Binding Base and Derived
 
-
-#### Father and Son
 ```bash
 index.js
     |____ App.js
 ```
-
 -  Use Component by importing Component 
-    > 稱為父 (如: index.js)
+    > 稱為父 (如: `index.js`)
 -  To be used 
-    > 稱為子元件 (如: App.js)
+    > 稱為子元件 (如: `App.js`)
 
 **在這邊，我們會試著在父(index.js)定義一個改變父的函式，綁定在子元件(App.js)的props，並透過子元件觸發。**
 
-To use a function binding in index.js
+To use a function binding in `index.js`
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -94,14 +88,15 @@ const printMessage=()=>{
 
 ReactDOM.render(
     <div>
-        // binding it
+        // pass the props to child component
         <App name="我的名字" handleClick={printMessage}/>
         <div id="show-area"></div>
     </div>,
     document.getElementById('root')
 );
 ```
-In App.js `handleClick={printMessage}` is binding to button's `onClick` via `props`
+
+In App.js `handleClick={printMessage}` is binding to button's `onClick` via `props` , `{name="我的名子"}` binds to button's name
 ```jsx
 function App(props){
   return(
@@ -112,32 +107,25 @@ function App(props){
 ```
 
 
-# progs children
+## progs children
 
 A react component can be used like 
-```jsx=
-//** 
+```js
 //    common way
 <react_component/>
 
-// ** 
 //     nested way
 <react_component> (THINGS) </react_component>
 ```
 - We name `(THINGS)` as children。
 
 So this header is going to talk about how to handle children inside `<react_component\>`
-- children是props之一，所以當使用的children改變時，畫面也會重繪。
-
-### Usage
-- Using state or react-router-dom to content of progs.children，
-- For component design，vis progs.children it divides construction into mltuiple layers (e.g. boostrap中的List & ListItem)
+- `children`是props之一，所以當使用的children改變時，畫面也會reload  
+- Using `state` or `react-router-dom` as content of `progs.children`
+- For component design，`progs.children` divides construction into mltuiple layers (e.g. `boostrap`中的`List` & `ListItem`)
 
 
-
-### Example
-
-Let's Add some word btw `<App> ... </App>`
+put value that will pass to `progs.children` btw `<App> progs.children's value </App>`
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -147,15 +135,37 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <div>
-        <App> Im_A_Children </App>
+        // <html_ELEMENT> pass the value TO_CHILD to child component <html_ELEMENT>
+        <App> TO_CHILD </App>
     </div>,
     document.getElementById('root')
 );
-
 ```
 
-在App.js函式中button標籤內使用children。
-因為children是props之一，所以使用方法為props.children。
+
+
+Example 
+`index.js`
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import Layout from "./Layout";
+import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(
+    <div>
+        <Layout>
+            <App> TO_PASS_VALUE_TO_LAYOUT </App>
+        </Layout>
+    </div>,
+    document.getElementById('root')
+);
+serviceWorker.unregister();
+```
+
+In `App.js`
 ```jsx 
 function App(props){
   return(
@@ -165,8 +175,7 @@ function App(props){
 export default App;
 ```
 
-
-Component Layout.js
+Component `Layout.js`
 ```jsx 
 import React from 'react';
 
@@ -203,35 +212,21 @@ const Layout=(props)=>{
     return(
       <div>
           <div className="nav-bar" style={navStyle}>
+            
             <div  className="icon" style={iconStyle}>
                 <img style={{height:"120%"}} src="picture.png" alt="icon"/>
             </div>
+            
             <input placeholder="搜尋" style={inputStyle}/>
+          
           </div>
+          
           <div className="index-container" style={{marginTop:"43px"}}>
-              {props.children}
+              {props.children}  // it will display TO_PASS_VALUE_TO_LAYOUT
           </div>
+          
       </div>
     );
 }
 export default Layout;
-```
-index.js:
-```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import Layout from "./Layout";
-import * as serviceWorker from './serviceWorker';
-
-ReactDOM.render(
-    <div>
-        <Layout>
-            <App>在index.js中設定文字</App>
-        </Layout>
-    </div>,
-    document.getElementById('root')
-);
-serviceWorker.unregister();
 ```
