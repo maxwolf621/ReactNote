@@ -1,17 +1,13 @@
 ###### tags: `React`
 # ES6 and DOM
 
-[TOC]
-
 ## DOM
-Document Object Model, DOM is described these files
--  HTML、XML and SVG  
+Document Object Model, DOM is described these files `HTML`、`XML` and `SVG`  
 
 If we want to get an DOM's elements in react
-```javascript=
+```jsx
 document.getElementById
 ```
-
 
 ## ES6 
 
@@ -20,7 +16,7 @@ React的結構非常仰賴ES6的class。
 ### Declarations
 
 Since ES6 give me us the options to `let` and `const` instead of initializing the variable only as global variable via `var`
-```javascript=
+```jsx
 // local variable
 let local_1;
 let local_1 = value;
@@ -31,7 +27,7 @@ const readOnly_2 = value;
 ### Arrow Function
 
 Declaration of Function Before ES6 
-```javascript
+```jsx
 function fun_name (parameters){
     // function body ...
 }
@@ -45,10 +41,7 @@ var function_name = function (parameters){
 
 Before ES6 we assign a value to a fields with `this.field` always
 
-To reduce/simply by using `this.` using **Arrow Function**
-
-
-```javascript
+```jsx
 DataType function = (parameters) => {
     // parameter operation
 }
@@ -80,12 +73,11 @@ getAll("B",1);
 
 ### Promise
 
-```javascript=
+```jsx
 宣告型態 宣告名稱 = new Promise((resolve, reject)=>{
     定義要先做什麼事情
     resolve(參數);
 })
-
 
 宣告名稱
 .then((參數，由resolve丟出)=>{ 
@@ -97,19 +89,22 @@ getAll("B",1);
 ```
 
 ### 解構賦值 (Alias)
-As object`getter method` or `array[index]` but it can get multiple object's fields or Array's elements with only one code line
+
 
 For example
-```jsx=
+```jsx
 /* For Array */
 const arr=[ "apple" , "banana" ];
-// only one line to get the elements
+
+// this mean 
+// a is arr[0]  , b is arr[1]
 const [ a , b ] = arr;
 
 console.log("a is "+a); // a is apple
 console.log("b is "+b); // b is banana
 
 /* For Object */
+
 const obj={ fruitOne: "apple", fruitTwo: "banana" };
 const { fruitOne: a , fruitTwo: b  } = obj;
 
@@ -118,12 +113,11 @@ console.log("b is "+b); // b is banana
 ```
 
 
-### Module
+### Module via `exprot`
 
-- ES6中，我們可以把js函式、變數、物件打包成模組，然後在其他js檔引入使用
+ES6中，我們可以使用`export`把js函式、變數、物件打包成模組，然後在其他js檔引入使用
 
-例如現在有個hello.js:
-```
+```jsx
 export const helloWorld=()=>{
     console.log("hello world!");
 }
@@ -132,7 +126,7 @@ export const msg="hello world";
 ```
 
 if `index.js` want to use function/variable inside module `hello.js`
-```javascript
+```jsx
 /*import + {Method_A, Method_B, ... } + from + path*/
 import {helloWorld, msg} from "./hello.js";
 
@@ -149,7 +143,7 @@ console.log(myMsg);
 
 with `default` we can export a class to be used by others
 
-```javascript
+```jsx
 const helloWorld=()=>{
     console.log("hello world!");
 }
@@ -160,16 +154,16 @@ export const msg="hello world";
 export default {helloWorld};
 ```
 
-在輸入檔中，我們只要給export default的物件一個名稱就能使用。
-```javascript
-import Instance_for_default_class,{Non_default_members_in_Module} from "Where_Module_Locates";
+在別的js做`import`時，我們只要給export default的物件一個名稱(Alias)就能使用。
 ```
-index.js
-```javascript
-import hello,{msg} from "./hello.js";
-// declare a object instance called hello 
-//    this instance can use helloWord method
+import Instance_for_default_class, {Non_default_members_in_Module} from "Where_Module_Locates";
+```
 
+for example 
+```jsx
+import hello,{msg} from "./hello.js";
+
+// declare an export-default object instance as hello 
 hello.helloWorld();
 console.log(msg);
 ```
