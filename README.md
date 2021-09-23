@@ -6,3 +6,8 @@
 - [State for class component and function component](State.md)
 - [userEffect](ReactHook_useEffect.md)
 - [form input](html_Element.md)
+
+## Component 
+
+- [Class Component](Class_Component.md)  
+- [Function Component](Function_Component.md)  
